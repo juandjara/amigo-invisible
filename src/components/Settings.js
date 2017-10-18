@@ -11,6 +11,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button'
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { CircularProgress } from 'material-ui/Progress';
+import qs from 'qs'
 
 export default class Settings extends Component {
   state = {
@@ -67,6 +68,13 @@ export default class Settings extends Component {
     this.setState({
       tab, email: '', password: ''
     })
+  }
+  getErrorMsgFromURL() {
+    const query = this.props.location.search.slice(1)
+    if(!query) {
+      return
+    }
+    return qs.parse(query).m
   }
   renderForm() {
     const {email, password, tab} = this.state
@@ -152,6 +160,7 @@ export default class Settings extends Component {
   }
   render() {
     const {loading, user} = this.state
+    const error = this.getErrorMsgFromURL()    
     return (
       <main>
         {loading && (
@@ -159,6 +168,9 @@ export default class Settings extends Component {
             <CircularProgress />
             <h3 style={{margin: '1rem'}}>Cargando ...</h3>
           </div>
+        )}
+        {error && (
+          <p style={{padding: '.5rem', color: 'tomato'}}>{error}</p>
         )}
         {user ? this.renderAccount() : this.renderTabs()}
       </main>
