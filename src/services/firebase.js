@@ -31,7 +31,7 @@ export function updateProfile(uid, data) {
 }
 export function addDBListener(path, cb) {
   const ref =  firebase.database().ref(path)
-  ref.on('value', cb)
+  ref.on('value', snapshot => cb(snapshot.val()))
 
   return ref
 }
