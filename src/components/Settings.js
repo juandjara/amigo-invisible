@@ -27,6 +27,10 @@ export default class Settings extends Component {
     loginObserver(user => {
       this.setState({user, loading: true})
       user ? console.log("Logged in with email ", user.email) : console.log("Logged out")
+      if(!user) {
+        this.setState({loading: false})
+        return
+      }
       getProfile(user.uid).then(profile => {
         this.setState({
           loading: false,
@@ -110,13 +114,7 @@ export default class Settings extends Component {
     const {user, name, likes, dislikes} = this.state
     return (
       <div>
-        <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', margin: '1em'}}>
-          <h2 style={{margin: 0}}>{user.email}</h2>
-          <div style={{flex: 1}}></div>
-          <Button onClick={() => logout()}>
-            <Icon style={{verticalAlign: 'middle', marginRight: 8}}>close</Icon> Cerrar sesi&oacute;n
-          </Button>
-        </div>
+        <h2 style={{margin: '1rem'}}>{user.email}</h2>        
         <form style={{margin: '1em'}} onSubmit={ev => this.updateProfile(ev)}>
           <TextField 
             fullWidth
@@ -127,6 +125,8 @@ export default class Settings extends Component {
           />
           <TextField 
             fullWidth
+            multiline
+            rows={3}
             style={{margin: '1em 0'}}
             label="Me gusta"
             value={likes}
@@ -134,6 +134,8 @@ export default class Settings extends Component {
           />
           <TextField 
             fullWidth
+            multiline
+            rows={3}
             style={{margin: '1em 0'}}
             label="No me gusta"
             value={dislikes}
@@ -142,17 +144,19 @@ export default class Settings extends Component {
           <Button type="submit" raised color="primary">
             Guardar
           </Button>
+          <Button onClick={() => logout()}>
+            Cerrar sesi&oacute;n
+          </Button>
         </form>
       </div>
     )
   }
   render() {
     const {loading, user} = this.state
-    const main = user ? this.renderAccount() : this.renderTabs()
     return (
       <main>
         {loading && (<h3 style={{margin: '1rem'}}>Cargando ...</h3>)}
-        {main}
+        {user ? this.renderAccount() : this.renderTabs()}
       </main>
     )
   }
