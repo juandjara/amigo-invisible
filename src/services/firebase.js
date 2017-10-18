@@ -13,6 +13,10 @@ export function login(email, password) {
 export function register(email, password) {
   return firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(user => user.uid)
+  .then(uid => {
+    updateProfile(uid, {name: ''})
+    return uid
+  })
   .then(getProfile)
 }
 export function logout() {

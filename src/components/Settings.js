@@ -55,7 +55,7 @@ export default class Settings extends Component {
     ev.preventDefault()
     const {user, name, likes, dislikes} = this.state
     this.setState({loading: true})
-    updateProfile(user.uid, {name, likes, dislikes})
+    updateProfile(user.uid, {name, likes, dislikes, email: user.email})
     .then(() => this.setState({ loading: false }))
   }
   handleChange = name => ev => {

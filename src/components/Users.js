@@ -8,7 +8,6 @@ import styled from 'styled-components'
 const ListIcon = styled(Icon)`
   vertical-align: bottom;
   margin-right: 10px;
-  color: ${props => props.color};
 `
 
 class Users extends React.Component {
@@ -44,15 +43,15 @@ class Users extends React.Component {
               <div>
                 <p style={{fontSize: 20, marginTop: 0}}>
                   <ListIcon>person</ListIcon>
-                  <span>{user.name}</span>
+                  <span>{user.name || user.email}</span>
                 </p>
                 <p style={{marginTop: 20, marginBottom: 10}}>
-                  <ListIcon color="green">thumb_up</ListIcon> 
+                  <ListIcon color="primary">thumb_up</ListIcon> 
                   <strong>Me gusta:</strong>
                 </p>
                 <div>{user.likes}</div>
                 <p style={{marginTop: 20, marginBottom: 10}}>
-                  <ListIcon color="red">thumb_down</ListIcon>
+                  <ListIcon color="error">thumb_down</ListIcon>
                   <strong>No me gusta:</strong>
                 </p>
                 <div>{user.dislikes}</div>                
