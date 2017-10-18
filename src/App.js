@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import Users from './components/Users'
 import Settings from './components/Settings'
+import Raffles from './components/Raffles'
 
 const theme = createMuiTheme({
   palette: {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path="/" exact render={() => <Redirect to="/users" />} />
               <Route path="/users" component={Users}></Route>
               <Route path="/settings" component={Settings} />
+              <Route path="/raffles" component={Raffles} />
             </Switch>
           </div>
         </BrowserRouter>
