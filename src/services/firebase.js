@@ -29,8 +29,8 @@ export function updateProfile(uid, data) {
     .ref('/users/' + uid)
     .set(data)
 }
-export function addDBListener(ref, cb) {
-  const ref =  firebase.database().ref(ref)
+export function addDBListener(path, cb) {
+  const ref =  firebase.database().ref(path)
   ref.on('value', cb)
 
   return ref
