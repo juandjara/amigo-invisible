@@ -10,6 +10,14 @@ export function login(email, password) {
   .then(user => user.uid)
   .then(getProfile)
 }
+export function register(email, password) {
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(user => user.uid)
+  .then(getProfile)
+}
+export function logout() {
+  return firebase.auth().signOut()
+}
 export function getProfile(uid) {
   return firebase.database()
     .ref('/users/' + uid)
@@ -21,14 +29,11 @@ export function updateProfile(uid, data) {
     .ref('/users/' + uid)
     .set(data)
 }
-export function register(email, password) {
-  return firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then(user => user.uid)
-  .then(getProfile)
-}
-export function logout() {
-  return firebase.auth().signOut()
-}
+export function addDBListener(ref, cb) {
+  const ref =  firebase.database().ref(ref)
+  ref.on('value', cb)
 
+  return ref
+}
 
 export default firebase
