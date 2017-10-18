@@ -10,7 +10,6 @@ import {
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button'
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Icon from 'material-ui/Icon'
 import { CircularProgress } from 'material-ui/Progress';
 
 export default class Settings extends Component {
@@ -112,7 +111,7 @@ export default class Settings extends Component {
     )
   }
   renderAccount() {
-    const {user, name, likes, dislikes} = this.state
+    const {name, likes, dislikes} = this.state
     return (
       <div>
         <form style={{margin: '1em'}} onSubmit={ev => this.updateProfile(ev)}>
