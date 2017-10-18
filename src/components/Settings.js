@@ -11,6 +11,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button'
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Icon from 'material-ui/Icon'
+import { CircularProgress } from 'material-ui/Progress';
 
 export default class Settings extends Component {
   state = {
@@ -114,7 +115,6 @@ export default class Settings extends Component {
     const {user, name, likes, dislikes} = this.state
     return (
       <div>
-        <h2 style={{margin: '1rem'}}>{user.email}</h2>        
         <form style={{margin: '1em'}} onSubmit={ev => this.updateProfile(ev)}>
           <TextField 
             fullWidth
@@ -155,7 +155,12 @@ export default class Settings extends Component {
     const {loading, user} = this.state
     return (
       <main>
-        {loading && (<h3 style={{margin: '1rem'}}>Cargando ...</h3>)}
+        {loading && (
+          <div style={{display: 'flex', alignItems: 'center', padding: '.5rem'}}>
+            <CircularProgress />
+            <h3 style={{margin: '1rem'}}>Cargando ...</h3>
+          </div>
+        )}
         {user ? this.renderAccount() : this.renderTabs()}
       </main>
     )
