@@ -42,6 +42,7 @@ export default class Couples extends Component {
   render() {
     const {loading, users, couples} = this.state
     const userNames = users.map(user => user.name).join(', ')
+    const noUserMsg = "No hay usuarios registrados"
     return (
       <main>
         {loading && (
@@ -58,7 +59,7 @@ export default class Couples extends Component {
           </div>
         ))}
         <div style={{padding: '1em', textAlign: 'center'}}>
-          <p><strong>Participantes:</strong> {userNames}</p>
+          <p><strong>Participantes:</strong> {userNames || noUserMsg}</p>
           <Button style={{margin: '1em auto', display: 'block'}} 
                   onClick={() => this.setCouples()}
                   raised color="primary">
