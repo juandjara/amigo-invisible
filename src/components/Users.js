@@ -17,7 +17,7 @@ class Users extends React.Component {
   }
   componentDidMount() { 
     this.dbref = addDBListener('/users', userTree => {
-      const users = Object.keys(userTree).map(uid => ({
+      const users = Object.keys(userTree || {}).map(uid => ({
         uid, 
         ...userTree[uid]
       }))
@@ -30,7 +30,13 @@ class Users extends React.Component {
   render() {
     const {loading, users} = this.state
     return (
-      <main> 
+      <main>
+        <h2 style={{fontSize: 20, margin: '1rem'}}>
+          Usuarios
+        </h2>
+        {users.length === 0 && (
+          <h3 style={{margin: '1rem'}}>No hay usuarios registrados en el sistema</h3>
+        )}
         {loading && (
           <div style={{display: 'flex', alignItems: 'center', padding: '.5rem'}}>
             <CircularProgress />

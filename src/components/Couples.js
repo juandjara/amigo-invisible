@@ -12,7 +12,7 @@ export default class Couples extends Component {
   }
   componentDidMount() { 
     this.dbref = addDBListener('/users', userTree => {
-      const users = Object.keys(userTree).map(uid => ({
+      const users = Object.keys(userTree || {}).map(uid => ({
         uid, 
         ...userTree[uid]
       }))
