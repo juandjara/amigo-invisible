@@ -44,7 +44,7 @@ export default class Couples extends Component {
     const userNames = users.map(user => user.name).join(', ')
     return (
       <main>
-        {this.state.loading && (
+        {loading && (
           <div style={{display: 'flex', alignItems: 'center', padding: '.5rem'}}>
             <CircularProgress />
             <h3 style={{margin: '1rem'}}>Cargando ...</h3>
