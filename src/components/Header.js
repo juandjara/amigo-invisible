@@ -41,8 +41,8 @@ const Header = () => (
       <ToolbarLink activeStyle={activeStyle} to="/users">
         <Button style={{color: 'inherit'}}>Usuarios</Button>
       </ToolbarLink>
-      <ToolbarLink activeStyle={activeStyle} to="/raffles">
-        <Button style={{color: 'inherit'}}>Sorteos</Button>
+      <ToolbarLink activeStyle={activeStyle} to="/couples">
+        <Button style={{color: 'inherit'}}>Parejas</Button>
       </ToolbarLink>
       <ToolbarLink activeStyle={activeStyle} to="/settings">
         <Button style={{color: 'inherit'}}>Mi cuenta</Button>
