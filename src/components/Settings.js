@@ -49,7 +49,13 @@ export default class Settings extends Component {
     const promise = tab === 0 ? 
       login(email, password) : 
       register(email, password)
-    promise.then(() => this.setState({loading: false}))
+    promise.then(() => {
+      this.setState({loading: false})
+      const redirect = this.getRedirectionFromURL()
+      if(redirect) {
+        this.props.history.push(redirect)
+      }
+    })
     promise.catch(err => console.error(err.message))
   }
   updateProfile(ev) {
@@ -69,12 +75,12 @@ export default class Settings extends Component {
       tab, email: '', password: ''
     })
   }
-  getErrorMsgFromURL() {
+  getRedirectionFromURL() {
     const query = this.props.location.search.slice(1)
     if(!query) {
       return
     }
-    return qs.parse(query).m
+    return qs.parse(query).next
   }
   renderForm() {
     const {email, password, tab} = this.state
@@ -160,7 +166,7 @@ export default class Settings extends Component {
   }
   render() {
     const {loading, user} = this.state
-    const error = this.getErrorMsgFromURL()    
+    const redirect = this.getRedirectionFromURL()    
     return (
       <main>
         {loading && (
@@ -169,8 +175,10 @@ export default class Settings extends Component {
             <h3 style={{margin: '1rem'}}>Cargando ...</h3>
           </div>
         )}
-        {error && (
-          <p style={{padding: '.5rem', color: 'tomato'}}>{error}</p>
+        {redirect && (
+          <p style={{padding: '.5rem', color: 'tomato'}}>
+            Debes iniciar sesión para realizar esta acción
+          </p>
         )}
         {user ? this.renderAccount() : this.renderTabs()}
       </main>
